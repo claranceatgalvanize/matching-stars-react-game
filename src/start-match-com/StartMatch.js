@@ -3,13 +3,21 @@ import { PlayNumber } from "../number-comp/PlayNumber";
 import { DisplayStars } from "../stars-comp/DisplayStars";
 // import { Utils } from "../utils-comp/Utils";
 import "./StartMatch.scss";
+import { PlayAgain } from "../play-again-comp/PlayAgain";
 
 export const StartMatch = () => {
   const [stars, setStars] = useState(utils.random(1, 9));
-  const [availableNums, setAvailableNums] = useState([1, 2, 3, 4, 5]);
-  const [candidateNums, setCandidateNums] = useState([2, 3]);
+  const [availableNums, setAvailableNums] = useState(utils.range(1, 9));
+  const [candidateNums, setCandidateNums] = useState([]);
 
   const candidatesAreWrong = utils.sum(candidateNums) > stars;
+  const gameIsDone = availableNums.length === 0;
+
+  const resetGame = () => {
+    setStars(utils.random(1, 9));
+    setAvailableNums(utils.range(1, 9));
+    setCandidateNums([]);
+  };
 
   const numberStatus = (number) => {
     if (!availableNums.includes(number)) {
@@ -21,8 +29,27 @@ export const StartMatch = () => {
     return "available";
   };
 
-  const addCandidate = (candidateNum) => {
-    console.log(candidateNum);
+  const onNumberClick = (clickedNum, currentStatus) => {
+    if (currentStatus === "used") {
+      return;
+    }
+
+    const newCandidateNums =
+      currentStatus === "available"
+        ? [...candidateNums, clickedNum]
+        : candidateNums.filter((cn) => cn !== clickedNum);
+
+    if (utils.sum(newCandidateNums) !== stars) {
+      setCandidateNums(newCandidateNums);
+    } else {
+      const newAvailableNums = availableNums.filter(
+        (n) => !newCandidateNums.includes(n)
+      );
+      setStars(utils.randomSumIn(newAvailableNums, 9));
+      setAvailableNums(newAvailableNums);
+      setCandidateNums([]);
+    }
+    console.log(newCandidateNums);
   };
 
   return (
@@ -33,9 +60,13 @@ export const StartMatch = () => {
         </div>
         <div className="body">
           <div className="left">
-            {utils.range(1, stars).map((starId) => (
-              <DisplayStars key={starId} />
-            ))}
+            {gameIsDone ? (
+              <PlayAgain resetOnClick={resetGame} />
+            ) : (
+              utils
+                .range(1, stars)
+                .map((starId) => <DisplayStars key={starId} />)
+            )}
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
@@ -44,7 +75,7 @@ export const StartMatch = () => {
                 number={number}
                 colors={colors}
                 status={numberStatus(number)}
-                addCandidate={addCandidate}
+                onNumberClick={onNumberClick}
               />
             ))}
           </div>
