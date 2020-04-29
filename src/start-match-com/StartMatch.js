@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { PlayNumber } from "../number-comp/PlayNumber";
 import "./StartMatch.scss";
 
 export const StartMatch = () => {
@@ -17,9 +18,7 @@ export const StartMatch = () => {
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
-              <button key={number} className="number">
-                {number}
-              </button>
+              <PlayNumber key={number} number={number} />
             ))}
           </div>
         </div>
