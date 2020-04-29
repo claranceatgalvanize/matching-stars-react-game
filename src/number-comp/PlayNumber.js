@@ -1,7 +1,11 @@
 import React from "react";
 
-export const PlayNumber = (props) => (
-  <button onClick={() => console.log("Num", props.number)} className="number">
-    {props.number}
+export const PlayNumber = ({ number, status, colors, addCandidate }) => (
+  <button
+    onClick={() => addCandidate(number)}
+    className="number"
+    style={{ backgroundColor: colors[status] }}
+  >
+    {number}
   </button>
 );

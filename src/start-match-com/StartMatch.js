@@ -1,9 +1,30 @@
 import React, { useState } from "react";
 import { PlayNumber } from "../number-comp/PlayNumber";
+import { DisplayStars } from "../stars-comp/DisplayStars";
+// import { Utils } from "../utils-comp/Utils";
 import "./StartMatch.scss";
 
 export const StartMatch = () => {
   const [stars, setStars] = useState(utils.random(1, 9));
+  const [availableNums, setAvailableNums] = useState([1, 2, 3, 4, 5]);
+  const [candidateNums, setCandidateNums] = useState([2, 3]);
+
+  const candidatesAreWrong = utils.sum(candidateNums) > stars;
+
+  const numberStatus = (number) => {
+    if (!availableNums.includes(number)) {
+      return "used";
+    }
+    if (candidateNums.includes(number)) {
+      return candidatesAreWrong ? "wrong" : "candidate";
+    }
+    return "available";
+  };
+
+  const addCandidate = (candidateNum) => {
+    console.log(candidateNum);
+  };
+
   return (
     <div>
       <div className="game">
@@ -13,12 +34,18 @@ export const StartMatch = () => {
         <div className="body">
           <div className="left">
             {utils.range(1, stars).map((starId) => (
-              <div key={starId} className="star" />
+              <DisplayStars key={starId} />
             ))}
           </div>
           <div className="right">
             {utils.range(1, 9).map((number) => (
-              <PlayNumber key={number} number={number} />
+              <PlayNumber
+                key={number}
+                number={number}
+                colors={colors}
+                status={numberStatus(number)}
+                addCandidate={addCandidate}
+              />
             ))}
           </div>
         </div>
