@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { PlayNumber } from "../number-comp/PlayNumber";
 import { DisplayStars } from "../stars-comp/DisplayStars";
 // import { Utils } from "../utils-comp/Utils";
-import "./StartMatch.scss";
+import "./MatchingStars.scss";
 import { PlayAgain } from "../play-again-comp/PlayAgain";
 
-export const StartMatch = () => {
+export const MatchingStars = ({ startNewGame }) => {
   const [stars, setStars] = useState(utils.random(1, 9));
   const [availableNums, setAvailableNums] = useState(utils.range(1, 9));
   const [candidateNums, setCandidateNums] = useState([]);
@@ -24,12 +24,6 @@ export const StartMatch = () => {
 
   const gameStatus =
     availableNums.length === 0 ? "won" : secondsLeft === 0 ? "lost" : "active";
-
-  const resetGame = () => {
-    setStars(utils.random(1, 9));
-    setAvailableNums(utils.range(1, 9));
-    setCandidateNums([]);
-  };
 
   const numberStatus = (number) => {
     if (!availableNums.includes(number)) {
@@ -65,7 +59,7 @@ export const StartMatch = () => {
   };
 
   return (
-    <div>
+    <div className="App">
       <div className="game">
         <div className="help">
           Pick 1 or more numbers that sum to the number of stars{" "}
@@ -73,7 +67,7 @@ export const StartMatch = () => {
         <div className="body">
           <div className="left">
             {gameStatus !== "active" ? (
-              <PlayAgain resetOnClick={resetGame} gameStatus={gameStatus} />
+              <PlayAgain resetOnClick={startNewGame} gameStatus={gameStatus} />
             ) : (
               utils
                 .range(1, stars)

@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
-import { StartMatch } from "./start-match-com/StartMatch";
+import { MatchingStars } from "./matching-stars-comp/MatchingStars";
 
 function App() {
+  const [gameId, setGameId] = useState(0);
   return (
-    <div className="App">
-      <StartMatch />
-    </div>
+    <MatchingStars key={gameId} startNewGame={() => setGameId(gameId + 1)} />
   );
 }
 
