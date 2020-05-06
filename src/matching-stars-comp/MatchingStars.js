@@ -61,20 +61,25 @@ export const MatchingStars = ({ startNewGame }) => {
   return (
     <div className="App">
       <div className="game">
-        <div className="help">
-          Pick 1 or more numbers that sum to the number of stars{" "}
+        <div className="instruction">
+          <div className="help">
+            Pick 1 or more numbers that sum to the number of stars{" "}
+          </div>
+          <div className="timer">Time Remaining: {secondsLeft}</div>
         </div>
         <div className="body">
-          <div className="left">
+          <div className="top">
             {gameStatus !== "active" ? (
               <PlayAgain resetOnClick={startNewGame} gameStatus={gameStatus} />
             ) : (
-              utils
-                .range(1, stars)
-                .map((starId) => <DisplayStars key={starId} />)
+              <span>
+                {utils.range(1, stars).map((starId) => (
+                  <DisplayStars key={starId} />
+                ))}
+              </span>
             )}
           </div>
-          <div className="right">
+          <div className="bottom">
             {utils.range(1, 9).map((number) => (
               <PlayNumber
                 key={number}
@@ -86,7 +91,6 @@ export const MatchingStars = ({ startNewGame }) => {
             ))}
           </div>
         </div>
-        <div className="timer">Time Remaining: {secondsLeft}</div>
       </div>
     </div>
   );
