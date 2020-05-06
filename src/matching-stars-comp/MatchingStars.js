@@ -98,7 +98,7 @@ export const MatchingStars = ({ startNewGame }) => {
 
 // Color Theme
 const colors = {
-  available: "lightgray",
+  available: "#222",
   used: "lightgreen",
   wrong: "lightcoral",
   candidate: "deepskyblue",

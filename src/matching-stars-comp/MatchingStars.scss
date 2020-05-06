@@ -15,47 +15,54 @@
 
 .instruction {
   width: 250px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   background: #222;
   border-radius: 16px;
   overflow: hidden;
 
   .help,
   .timer {
+    color: #666;
+    text-align: center;
     padding: 16px;
-    border: 0.02px solid rgba($color: #666, $alpha: 0.5);
+  }
+  .timer {
+    box-shadow: 0 0 0 1px rgba($color: #fff, $alpha: 0.09);
   }
 }
 
 .body {
-  // border: 1px solid rgba($color: #000000, $alpha: 1);
   margin: 0 auto;
-  width: 250px;
+  width: 249px;
   border-radius: 16px;
   overflow: hidden;
 
   .top {
-    // text-align: center;
     height: 230px;
     width: 100%;
-    background: #666;
-    // border: thin solid #ddd;
+    background: #222;
   }
 
   .bottom {
     width: 100%;
-    // height: 230px;
-    // text-align: center;
-    // padding: 10px;
-    // width: 50%;
-    // border: thin solid #ddd;
-  }
-}
 
-.help {
-  color: #666;
-  // margin: 10px;
-  text-align: center;
+    .number {
+      background: none;
+      color: #fff;
+      width: 83px;
+      height: 83px;
+      font-size: 25px;
+      font-weight: 150;
+      border: none;
+      box-shadow: 0 0 0 1px rgba($color: #fff, $alpha: 0.09);
+
+      &:focus,
+      &:active {
+        outline: none;
+        border: none;
+      }
+    }
+  }
 }
 
 .star {
@@ -66,35 +73,14 @@
 .star:after {
   content: "\2605";
   font-size: 32px;
-  color: rgba($color: #000, $alpha: 0.5);
-}
-
-.number {
-  background: none;
-  width: 83px;
-  height: 83px;
-  font-size: 25px;
-  border: none;
-
-  &:focus,
-  &:active {
-    outline: none;
-    border: none;
-  }
-
-  &:hover {
-    background: red;
-  }
+  color: rgba($color: #fff, $alpha: 0.2);
 }
 
 .timer {
   color: #666;
-  // margin-top: 3px;
-  // margin-left: 3px;
 }
 
 .game-done .message {
   font-size: 250%;
   font-weight: bold;
-  // margin: 15px;
 }
