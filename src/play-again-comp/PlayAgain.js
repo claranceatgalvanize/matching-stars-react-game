@@ -9,7 +9,7 @@ export const PlayAgain = ({ resetOnClick, gameStatus }) => {
       >
         {gameStatus === "lost" ? "Game Over" : "Nice Job!"}
       </div>
-      <button onClick={resetOnClick} className="game-done">
+      <button onClick={resetOnClick} className="game-done-btn">
         Play Again
       </button>
     </div>

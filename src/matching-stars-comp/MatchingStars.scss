@@ -80,7 +80,29 @@
   color: #666;
 }
 
-.game-done .message {
-  font-size: 250%;
-  font-weight: bold;
+.game-done {
+  .message {
+    font-size: 250%;
+    font-weight: 100;
+    margin-bottom: 32px;
+  }
+  .game-done-btn {
+    padding: 10px 50px;
+    font-size: 12px;
+    border-radius: 50px;
+    background: none;
+    color: #666;
+    border: none;
+    box-shadow: 0 0 0 0.5px rgba($color: #fff, $alpha: 0.5);
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &:hover {
+      background: rgba($color: #fff, $alpha: 0.2);
+      color: #222;
+    }
+  }
 }
